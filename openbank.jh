@@ -1,0 +1,45 @@
+
+
+application {
+  config {
+    baseName openbank
+    applicationType monolith
+    packageName io.demo.openbank
+    authenticationType jwt
+    prodDatabaseType mysql
+    clientFramework react
+  }
+  entities *
+}
+
+entity Customer {
+    name String
+    type CustomerType
+    document String
+    dateOfBird Instant
+}
+
+entity Address {
+    streetAddress1 String
+    streetAddress2 String
+    postalCode String
+    city String
+    country String
+}
+
+enum CustomerType {
+	BUSINESS, RETAIL
+}
+
+entity Account{
+    accountNumber String
+    balance Numeric
+}
+
+relationship OneToOne {
+   Customer{legalAddress} to Address
+}
+
+relationship OneToMany {
+   Customer{account} to Account
+}
